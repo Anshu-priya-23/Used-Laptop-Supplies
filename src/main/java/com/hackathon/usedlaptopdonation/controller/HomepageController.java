@@ -65,6 +65,7 @@ public class HomepageController {
     @GetMapping("/donor/dashboard")
     public String donorDashboard() { return "donor-dashboard"; }
 
-    @GetMapping("/requester/dashboard")
-    public String requesterDashboard() { return "requester-dashboard"; }
+   /* @GetMapping("/requester/dashboard")
+    public String requesterDashboard() { return "requester-dashboard"; }*/
+    
 }
