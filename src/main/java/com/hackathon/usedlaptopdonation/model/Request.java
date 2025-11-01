@@ -37,6 +37,18 @@ public class Request {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
+    
+    @Column(name = "preferred_brand", length = 50)
+    private String preferredBrand;
+
+    @Column(name = "min_ram", length = 20)
+    private String minRam;
+
+    @Column(name = "min_storage", length = 20)
+    private String minStorage;
+
+    @Column(name = "preferred_condition", length = 50)
+    private String preferredCondition;
 
     // Constructors
     public Request() {}
@@ -114,5 +126,37 @@ public class Request {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+    
+    public String getPreferredBrand() {
+        return preferredBrand;
+    }
+
+    public void setPreferredBrand(String preferredBrand) {
+        this.preferredBrand = preferredBrand;
+    }
+
+    public String getMinRam() {
+        return minRam;
+    }
+
+    public void setMinRam(String minRam) {
+        this.minRam = minRam;
+    }
+
+    public String getMinStorage() {
+        return minStorage;
+    }
+
+    public void setMinStorage(String minStorage) {
+        this.minStorage = minStorage;
+    }
+
+    public String getPreferredCondition() {
+        return preferredCondition;
+    }
+
+    public void setPreferredCondition(String preferredCondition) {
+        this.preferredCondition = preferredCondition;
     }
 }
