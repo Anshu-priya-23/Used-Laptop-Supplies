@@ -7,47 +7,80 @@
         body {
             font-family: 'Segoe UI', sans-serif;
             text-align: center;
-            margin-top: 100px;
+            margin-top: 50px;
             background-color: #f9f9f9;
         }
-        h1 {
-            color: #333;
-        }
-        .button-container {
-            margin-top: 30px;
-        }
-        a {
+        h1 { color: #333; }
+        .button-container { margin-top: 30px; }
+        a.button {
             display: inline-block;
-            text-decoration: none;
             background-color: #4CAF50;
             color: white;
-            border: none;
+            text-decoration: none;
             padding: 12px 30px;
             margin: 10px;
             border-radius: 6px;
             font-size: 16px;
+        }
+        a.button:hover { background-color: #45a049; }
+
+        /* Form styling */
+        form {
+            background: white;
+            display: inline-block;
+            margin-top: 20px;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
             cursor: pointer;
         }
-        a:hover {
-            background-color: #45a049;
-        }
+        button:hover { background-color: #0d5ca6; }
     </style>
 </head>
 <body>
+
     <h1>Welcome to Used Laptop Donation System</h1>
-    <p>Please select your role to continue:</p>
 
-    <div class="button-container">
-        <!-- ✅ Login links -->
-        <a th:href="@{/login/donor}">Login as Donor</a>
-        <a th:href="@{/login/requester}">Login as Requester</a>
-        <a th:href="@{/login/admin}">Login as Admin</a>
+    <!-- 🌸 Show role buttons only if no role selected -->
+    <div class="button-container" th:if="${selectedRole == null}">
+        <a th:href="@{/homepage(role='donor')}" class="button">Donor</a>
+        <a th:href="@{/homepage(role='requester')}" class="button">Requester</a>
+        <a th:href="@{/homepage(role='admin')}" class="button">Admin</a>
     </div>
 
-    <div class="button-container">
-        <!-- ✅ Register links -->
-        <a th:href="@{/register/donor}">Register as Donor</a>
-        <a th:href="@{/register/requester}">Register as Requester</a>
+    <!-- 🌸 Register form shown when role selected -->
+    <div th:if="${selectedRole != null}">
+        <h2 th:text="'Register as ' + ${selectedRole}"></h2>
+
+        <form th:action="@{/register}" method="post">
+            <input type="text" name="username" placeholder="Enter Username" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
+
+            <input type="hidden" name="role" th:value="${selectedRole}">
+
+            <button type="submit">Register</button>
+        </form>
+
+        <p style="margin-top:15px;">
+            Already have an account? 
+            <a th:href="@{/login/{role}(role=${selectedRole})}">Login as <span th:text="${selectedRole}"></span></a>
+        </p>
     </div>
+
 </body>
 </html>

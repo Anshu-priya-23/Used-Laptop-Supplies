@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Request Submitted</title>
+    <style>
+        body {
+            text-align: center;
+            padding: 100px;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .success-box {
+            background-color: #e6ffe6;
+            border: 2px solid #4CAF50;
+            padding: 50px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-box">
+        <h2>✅ Request Submitted Successfully!</h2>
+        <p>Your request has been recorded. Our team will review it soon.</p>
+        <br>
+        <a th:href="@{/requester/dashboard}">Back to Dashboard</a> |
+        <a th:href="@{/requester/view-requests}">View My Requests</a>
+    </div>
+</body>
+</html>

@@ -24,40 +24,46 @@ public class RequesterController {
     }
 
     // ✅ Dashboard + Add Request form
-   @GetMapping("/dashboard")
+    @GetMapping("/dashboard")
     public String showDashboard(Model model, HttpSession session) {
         String email = (String) session.getAttribute("loggedInEmail");
 
-        if (email == null) {
-            return "redirect:/login/requester"; // not logged in
+        // ✅ If not logged in, redirect to login
+        if (email == null || email.isEmpty()) {
+            return "redirect:/login/requester";
         }
 
         model.addAttribute("request", new Request());
         return "requester-dashboard";
     }
-    
-    
 
-
-    // ✅ Submit new request
+    // ✅ Submit new request → Show Success Page
     @PostMapping("/submit-request")
-    public String submitRequest(@ModelAttribute Request request, HttpSession session) {
+    public String submitRequest(@ModelAttribute Request request,
+                                HttpSession session,
+                                Model model) {
         String email = (String) session.getAttribute("loggedInEmail");
 
-        if (email == null) {
+        // ✅ Check if session expired
+        if (email == null || email.isEmpty()) {
+            System.out.println("⚠ Session expired — redirecting to login.");
             return "redirect:/login/requester";
         }
 
-        // Fetch actual logged-in user
+        // ✅ Fetch logged-in requester
         User requester = userService.getUserByEmail(email).orElse(null);
-
         if (requester == null) {
+            System.out.println("⚠ No requester found for email: " + email);
             return "redirect:/login/requester";
         }
 
+        // ✅ Attach user and save
         request.setRequester(requester);
         requestService.saveRequest(request);
-        return "redirect:/requester/view-requests";
+
+        // ✅ Show success page directly (not redirect)
+        model.addAttribute("message", "Your request has been submitted successfully!");
+        return "requester-success";  // ✅ This will open the success page
     }
 
     // ✅ View all requests by this requester
@@ -65,7 +71,7 @@ public class RequesterController {
     public String viewRequests(Model model, HttpSession session) {
         String email = (String) session.getAttribute("loggedInEmail");
 
-        if (email == null) {
+        if (email == null || email.isEmpty()) {
             return "redirect:/login/requester";
         }
 

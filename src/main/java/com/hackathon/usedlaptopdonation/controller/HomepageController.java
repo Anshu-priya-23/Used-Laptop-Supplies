@@ -3,13 +3,14 @@ package com.hackathon.usedlaptopdonation.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomepageController {
 
-    // HOMEPAGE
     @GetMapping("/homepage")
-    public String home() {
+    public String home(@RequestParam(value = "role", required = false) String role, Model model) {
+        model.addAttribute("selectedRole", role);
         return "homepage"; // homepage.html
     }
 
@@ -20,12 +21,20 @@ public class HomepageController {
         return "login"; // login.html
     }
 
-    // PROCESS LOGIN
+    // ✅ PROCESS LOGIN + DEBUG
     @PostMapping("/process-login")
     public String processLogin(@RequestParam String username,
                                @RequestParam String password,
                                @RequestParam String role,
-                               Model model) {
+                               Model model,
+                               HttpSession session) {
+
+        System.out.println("🟢 Login attempt: " + username + " (" + role + ")");
+
+        // ✅ Save logged-in email/username to session
+        session.setAttribute("loggedInEmail", username);
+        System.out.println("✅ Session saved: loggedInEmail = " + session.getAttribute("loggedInEmail"));
+
         if (username.equals("admin") && password.equals("admin")) {
             return "redirect:/admin/dashboard";
         } else if (role.equalsIgnoreCase("donor")) {
@@ -43,28 +52,23 @@ public class HomepageController {
     @GetMapping("/register/{role}")
     public String showRegisterPage(@PathVariable String role, Model model) {
         model.addAttribute("role", role);
-        return "register"; // register.html
+        return "register";
     }
 
-    // PROCESS REGISTRATION
     @PostMapping("/register")
     public String registerUser(@RequestParam String username,
                                @RequestParam String password,
                                @RequestParam String role,
                                Model model) {
-        System.out.println("New user registered: " + username + " (" + role + ")");
+        System.out.println("🟢 Registered new user: " + username + " (" + role + ")");
         model.addAttribute("message", "Registration successful!");
         model.addAttribute("role", role);
-        return "login"; // go to login page
+        return "login";
     }
 
     // DASHBOARDS
     @GetMapping("/admin/dashboard")
-    public String adminDashboard() { return "admin-dashboard"; }
-
-    //@GetMapping("/donor/dashboard")
-    //public String donorDashboard() { return "donor-dashboard"; }
-
-    //@GetMapping("/requester/dashboard")
-    //public String requesterDashboard() { return "requester-dashboard"; }
+    public String adminDashboard() {
+        return "admin-dashboard";
+    }
 }
