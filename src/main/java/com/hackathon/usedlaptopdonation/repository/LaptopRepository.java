@@ -8,9 +8,7 @@ import java.util.List;
 /**
  * Repository for managing Laptop entities in the database.
  */
-@Repository
-public interface LaptopRepository extends JpaRepository<Laptop, Long> {
-    List<Laptop> findByStatus(String status);
+
 @Repository
 public interface LaptopRepository extends JpaRepository<Laptop, Long> {
     List<Laptop> findByAvailability(String availability);

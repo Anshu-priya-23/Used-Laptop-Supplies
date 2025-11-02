@@ -21,10 +21,7 @@
             justify-content: space-between;
         }
 
-        header h1 {
-            font-size: 22px;
-            margin: 0;
-        }
+        header h1 { font-size: 22px; margin: 0; }
 
         nav a {
             color: white;
@@ -33,13 +30,9 @@
             font-weight: 500;
         }
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+        nav a:hover { text-decoration: underline; }
 
-        main {
-            padding: 30px;
-        }
+        main { padding: 30px; }
 
         table {
             width: 100%;
@@ -54,10 +47,7 @@
             text-align: left;
         }
 
-        th {
-            background-color: #3498db;
-            color: white;
-        }
+        th { background-color: #3498db; color: white; }
 
         .btn {
             padding: 6px 12px;
@@ -68,17 +58,11 @@
             font-size: 14px;
         }
 
-        .btn-approve {
-            background-color: #28a745;
-        }
+        .btn-approve { background-color: #28a745; }
+        .btn-reject { background-color: #e74c3c; }
+        .btn-match { background-color: #17a2b8; margin-bottom: 20px; }
 
-        .btn-reject {
-            background-color: #e74c3c;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
+        .btn:hover { opacity: 0.9; }
     </style>
 </head>
 <body>
@@ -87,35 +71,40 @@
     <h1>Admin Control Panel</h1>
     <nav>
         <a th:href="@{/admin/home}">Dashboard</a>
-        <a th:href="@{/admin/home}">Approvals</a>
-        <a th:href="@{/admin/reports}">Reports</a> <!-- ✅ Fixed Link -->
+        <a th:href="@{/admin/reports}">Reports</a>
         <a href="#">Logout</a>
     </nav>
 </header>
 
 <main>
     <h2>Pending Laptop Donations</h2>
+
+    <!-- Run Matching Button -->
+    <form th:action="@{/admin/match}" method="post">
+        <button type="submit" class="btn btn-match">Run Matching</button>
+    </form>
+
     <table>
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Donor Name</th>
                 <th>Brand</th>
                 <th>Condition</th>
+                <th>Donor Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="donation : ${pendingDonations}">
-                <td th:text="${donation.id}"></td>
-                <td th:text="${donation.donorName}"></td>
+                <td th:text="${donation.laptopId}"></td>
                 <td th:text="${donation.brand}"></td>
-                <td th:text="${donation.condition}"></td>
+                <td th:text="${donation.conditionStatus}"></td>
+                 <td th:text="${donation.donorId}"></td>
                 <td>
-                    <form th:action="@{'/admin/approve/' + ${donation.id}}" method="post" style="display:inline;">
+                    <form th:action="@{'/admin/approve/' + ${donation.laptopId}}" method="post" style="display:inline;">
                         <button type="submit" class="btn btn-approve">Approve</button>
                     </form>
-                    <form th:action="@{'/admin/reject/' + ${donation.id}}" method="post" style="display:inline;">
+                    <form th:action="@{'/admin/reject/' + ${donation.laptopId}}" method="post" style="display:inline;">
                         <button type="submit" class="btn btn-reject">Reject</button>
                     </form>
                 </td>

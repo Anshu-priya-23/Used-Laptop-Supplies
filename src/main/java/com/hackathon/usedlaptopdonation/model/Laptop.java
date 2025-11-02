@@ -52,33 +52,9 @@ public class Laptop {
 
     /** Current status of the laptop (Available, Approved, Donated, etc.) */
     @Column(length = 20)
-    private String status = "Available";
-
-    /** Timestamp when the laptop record was created */
-    @Column(name = "donor_id")
-    private Long donorId;
-
-    @Column(length = 50)
-    private String brand;
-
-    @Column(length = 50)
-    private String model;
-
-    @Column(length = 20)
-    private String ram;
-
-    @Column(length = 20)
-    private String storage;
-
-    @Column(name = "condition", length = 50)
-    private String conditionStatus;
-
-    @Column(length = 100)
-    private String location;
-
-    @Column(length = 20)
     private String availability = "Available";
-
+    
+        
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
@@ -99,10 +75,7 @@ public class Laptop {
      * @param location Laptop location
      * @param status Current status of the laptop
      */
-    public Laptop(Long donorId, String brand, String model, String ram, String storage,
-                  String conditionStatus, String location, String status) {
-    public Laptop() {
-    }
+    
 
     public Laptop(Long donorId, String brand, String model, String ram, String storage,
                   String conditionStatus, String location, String availability) {
@@ -113,99 +86,37 @@ public class Laptop {
         this.storage = storage;
         this.conditionStatus = conditionStatus;
         this.location = location;
-        this.status = status;
-    }
+        this.availability = availability;    }
 
-    // ---- Getters and Setters ----
+ // ---- Getters and Setters ----
+    public Long getLaptopId() { return laptopId; }
+    public void setLaptopId(Long laptopId) { this.laptopId = laptopId; }
 
-        this.availability = availability;
-    }
+    public Long getDonorId() { return donorId; }
+    public void setDonorId(Long donorId) { this.donorId = donorId; }
 
-    // ---- Getters and Setters ----
-    public Long getLaptopId() {
-        return laptopId;
-    }
+    public String getBrand() { return brand; }
+    public void setBrand(String brand) { this.brand = brand; }
 
-    public void setLaptopId(Long laptopId) {
-        this.laptopId = laptopId;
-    }
+    public String getModel() { return model; }
+    public void setModel(String model) { this.model = model; }
 
-    public Long getDonorId() {
-        return donorId;
-    }
+    public String getRam() { return ram; }
+    public void setRam(String ram) { this.ram = ram; }
 
-    public void setDonorId(Long donorId) {
-        this.donorId = donorId;
-    }
+    public String getStorage() { return storage; }
+    public void setStorage(String storage) { this.storage = storage; }
 
-    public String getBrand() {
-        return brand;
-    }
+    public String getConditionStatus() { return conditionStatus; }
+    public void setConditionStatus(String conditionStatus) { this.conditionStatus = conditionStatus; }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
+    public String getLocation() { return location; }
+    public void setLocation(String location) { this.location = location; }
 
-    public String getModel() {
-        return model;
-    }
+    public String getAvailability() { return availability; }
+    public void setAvailability(String availability) { this.availability = availability; }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getRam() {
-        return ram;
-    }
-
-    public void setRam(String ram) {
-        this.ram = ram;
-    }
-
-    public String getStorage() {
-        return storage;
-    }
-
-    public void setStorage(String storage) {
-        this.storage = storage;
-    }
-
-    public String getConditionStatus() {
-        return conditionStatus;
-    }
-
-    public void setConditionStatus(String conditionStatus) {
-        this.conditionStatus = conditionStatus;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    public String getAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(String availability) {
-        this.availability = availability;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }
-}
+

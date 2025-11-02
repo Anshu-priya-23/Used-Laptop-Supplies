@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Reports Dashboard</title>
-    <link rel="stylesheet" th:href="@{/css/admin-style.css}">
     <style>
-        /* Page background */
         body {
             background-color: #f7faf7;
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -112,14 +110,15 @@
     <h2 class="dashboard-title">Reports Overview</h2>
 
     <main>
+
         <!-- Donation Reports -->
         <div class="section">
             <h2>Donation Reports</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Donor Name</th>
+                        <th>Laptop ID</th>
+                        <th>Donor ID</th>
                         <th>Brand</th>
                         <th>Status</th>
                     </tr>
@@ -129,10 +128,10 @@
                         <td colspan="4" class="no-data">No donation entries yet</td>
                     </tr>
                     <tr th:each="laptop : ${donations}">
-                        <td th:text="${laptop.id}"></td>
-                        <td th:text="${laptop.donorName}"></td>
-                        <td th:text="${laptop.brand}"></td>
-                        <td th:text="${laptop.status}"></td>
+                        <td th:text="${laptop.laptopId}"></td>
+                        <td th:text="${laptop.donorId}"></td>
+                        <td th:text="${laptop.brand} + ' ' + ${laptop.model}"></td>
+                        <td th:text="${laptop.availability}"></td>
                     </tr>
                 </tbody>
             </table>
@@ -144,19 +143,21 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Request ID</th>
                         <th>Requester Name</th>
-                        <th>Details</th>
+                        <th>Purpose</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:if="${#lists.isEmpty(pendingRequests)}">
-                        <td colspan="3" class="no-data">No pending requests found</td>
+                        <td colspan="4" class="no-data">No pending requests found</td>
                     </tr>
                     <tr th:each="req : ${pendingRequests}">
-                        <td th:text="${req.id}"></td>
-                        <td th:text="${req.requesterName}"></td>
-                        <td th:text="${req.details}"></td>
+                        <td th:text="${req.requestId}"></td>
+                        <td th:text="${req.requester.name}"></td>
+                        <td th:text="${req.purpose}"></td>
+                        <td th:text="${req.status}"></td>
                     </tr>
                 </tbody>
             </table>
@@ -168,24 +169,28 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Match ID</th>
                         <th>Donor Name</th>
-                        <th>Recipient Name</th>
+                        <th>Requester Name</th>
+                        <th>Laptop</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:if="${#lists.isEmpty(fulfilledDonations)}">
-                        <td colspan="3" class="no-data">No fulfilled donations yet</td>
+                        <td colspan="5" class="no-data">No fulfilled donations yet</td>
                     </tr>
                     <tr th:each="match : ${fulfilledDonations}">
                         <td th:text="${match.id}"></td>
-                        <td th:text="${match.donorName}"></td>
-                        <td th:text="${match.recipientName}"></td>
+                        <td th:text="${match.donor.name}"></td>
+                        <td th:text="${match.requester.name}"></td>
+                        <td th:text="${match.laptop.brand} + ' ' + ${match.laptop.model}"></td>
+                        <td th:text="${match.status}"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
     </main>
 </body>
 </html>
-

@@ -18,7 +18,7 @@ public interface AdminRepository extends JpaRepository<Laptop, Long> {
      *
      * @return List of laptops with pending approval.
      */
-    List<Laptop> findByStatus(String status);
+	List<Laptop> findByAvailability(String availability);
 
 }
 

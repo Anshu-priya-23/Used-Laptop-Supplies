@@ -3,23 +3,14 @@ package com.hackathon.usedlaptopdonation.model;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * Entity representing a record in the 'matches' table.
+ * Defines a relationship between a donor, a requester, and a laptop.
+ * Used by Matching & Notification module.
+ */
 @Entity
 @Table(name = "matches")
 public class Match {
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import java.time.LocalDateTime;
-
-/** * Entity representing a record in the 'matches' table. 
- * * Defines a relationship between a donor, a requester, and a laptop. 
- * * Used by Matching & Notification module. */
-
-@Entity
-@Table(name = "matches")
-public class Match {
-	
-	private static final Logger logger = LoggerFactory.getLogger(Match.class);
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
