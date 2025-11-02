@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Control Panel</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2C3E50;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 {
+            font-size: 22px;
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 25px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 14px;
+        }
+
+        .btn-approve {
+            background-color: #28a745;
+        }
+
+        .btn-reject {
+            background-color: #e74c3c;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Admin Control Panel</h1>
+    <nav>
+        <a th:href="@{/admin/home}">Dashboard</a>
+        <a th:href="@{/admin/home}">Approvals</a>
+        <a th:href="@{/admin/reports}">Reports</a> <!-- ✅ Fixed Link -->
+        <a href="#">Logout</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Pending Laptop Donations</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Donor Name</th>
+                <th>Brand</th>
+                <th>Condition</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="donation : ${pendingDonations}">
+                <td th:text="${donation.id}"></td>
+                <td th:text="${donation.donorName}"></td>
+                <td th:text="${donation.brand}"></td>
+                <td th:text="${donation.condition}"></td>
+                <td>
+                    <form th:action="@{'/admin/approve/' + ${donation.id}}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-approve">Approve</button>
+                    </form>
+                    <form th:action="@{'/admin/reject/' + ${donation.id}}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-reject">Reject</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

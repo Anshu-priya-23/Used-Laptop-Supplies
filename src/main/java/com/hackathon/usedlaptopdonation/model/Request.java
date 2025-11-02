@@ -37,6 +37,8 @@ public class Request {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
+    
+    
 
     // Constructors
     public Request() {}
@@ -115,4 +117,5 @@ public class Request {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+    
 }
