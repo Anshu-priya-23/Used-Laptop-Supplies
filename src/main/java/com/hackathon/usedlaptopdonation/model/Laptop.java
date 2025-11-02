@@ -55,6 +55,30 @@ public class Laptop {
     private String status = "Available";
 
     /** Timestamp when the laptop record was created */
+    @Column(name = "donor_id")
+    private Long donorId;
+
+    @Column(length = 50)
+    private String brand;
+
+    @Column(length = 50)
+    private String model;
+
+    @Column(length = 20)
+    private String ram;
+
+    @Column(length = 20)
+    private String storage;
+
+    @Column(name = "condition", length = 50)
+    private String conditionStatus;
+
+    @Column(length = 100)
+    private String location;
+
+    @Column(length = 20)
+    private String availability = "Available";
+
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
@@ -77,6 +101,11 @@ public class Laptop {
      */
     public Laptop(Long donorId, String brand, String model, String ram, String storage,
                   String conditionStatus, String location, String status) {
+    public Laptop() {
+    }
+
+    public Laptop(Long donorId, String brand, String model, String ram, String storage,
+                  String conditionStatus, String location, String availability) {
         this.donorId = donorId;
         this.brand = brand;
         this.model = model;
@@ -89,6 +118,10 @@ public class Laptop {
 
     // ---- Getters and Setters ----
 
+        this.availability = availability;
+    }
+
+    // ---- Getters and Setters ----
     public Long getLaptopId() {
         return laptopId;
     }
@@ -159,6 +192,12 @@ public class Laptop {
 
     public void setStatus(String status) {
         this.status = status;
+    public String getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(String availability) {
+        this.availability = availability;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -168,4 +207,5 @@ public class Laptop {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+}
 }
