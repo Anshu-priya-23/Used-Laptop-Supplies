@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Reports Dashboard</title>
+    <style>
+        body {
+            background-color: #f7faf7;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: #2e2e2e;
+            margin: 0;
+        }
+
+        header {
+            background-color: #2e7d32;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 40px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.6rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            background: #388e3c;
+            padding: 8px 14px;
+            border-radius: 8px;
+            margin-left: 15px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: #1b5e20;
+        }
+
+        .dashboard-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #2e7d32;
+            margin: 30px 0 20px 0;
+            font-weight: 600;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .section {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            color: #2e7d32;
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f1f8f4;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #777;
+            padding: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Admin Reports Dashboard</h1>
+        <nav>
+            <a th:href="@{/admin/home}">🏠 Dashboard</a>
+            <a th:href="@{/logout}">🚪 Logout</a>
+        </nav>
+    </header>
+
+    <h2 class="dashboard-title">Reports Overview</h2>
+
+    <main>
+
+        <!-- Donation Reports -->
+        <div class="section">
+            <h2>Donation Reports</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Laptop ID</th>
+                        <th>Donor ID</th>
+                        <th>Brand</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${#lists.isEmpty(donations)}">
+                        <td colspan="4" class="no-data">No donation entries yet</td>
+                    </tr>
+                    <tr th:each="laptop : ${donations}">
+                        <td th:text="${laptop.laptopId}"></td>
+                        <td th:text="${laptop.donorId}"></td>
+                        <td th:text="${laptop.brand} + ' ' + ${laptop.model}"></td>
+                        <td th:text="${laptop.availability}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pending Requests -->
+        <div class="section">
+            <h2>Pending Requests</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Requester Name</th>
+                        <th>Purpose</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${#lists.isEmpty(pendingRequests)}">
+                        <td colspan="4" class="no-data">No pending requests found</td>
+                    </tr>
+                    <tr th:each="req : ${pendingRequests}">
+                        <td th:text="${req.requestId}"></td>
+                        <td th:text="${req.requester.name}"></td>
+                        <td th:text="${req.purpose}"></td>
+                        <td th:text="${req.status}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Fulfilled Donations -->
+        <div class="section">
+            <h2>Fulfilled Donations</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Match ID</th>
+                        <th>Donor Name</th>
+                        <th>Requester Name</th>
+                        <th>Laptop</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${#lists.isEmpty(fulfilledDonations)}">
+                        <td colspan="5" class="no-data">No fulfilled donations yet</td>
+                    </tr>
+                    <tr th:each="match : ${fulfilledDonations}">
+                        <td th:text="${match.id}"></td>
+                        <td th:text="${match.donor.name}"></td>
+                        <td th:text="${match.requester.name}"></td>
+                        <td th:text="${match.laptop.brand} + ' ' + ${match.laptop.model}"></td>
+                        <td th:text="${match.status}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+</body>
+</html>

@@ -5,9 +5,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.time.LocalDateTime;
 
+
 /** * Entity representing a record in the 'matches' table. 
  * * Defines a relationship between a donor, a requester, and a laptop. 
  * * Used by Matching & Notification module. */
+
+
+/**
+ * Entity representing a record in the 'matches' table.
+ * Defines a relationship between a donor, a requester, and a laptop.
+ * Used by Matching & Notification module.
+ */
 
 @Entity
 @Table(name = "matches")

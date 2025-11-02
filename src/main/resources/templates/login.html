@@ -20,7 +20,7 @@
         input {
             margin: 10px 0;
             padding: 8px;
-            width: 200px;
+            width: 220px; /* 🔹CHANGE: slightly wider input */
             border: 1px solid #ccc;
             border-radius: 4px;
         }
@@ -31,16 +31,22 @@
             padding: 10px 25px;
             border-radius: 6px;
             cursor: pointer;
+            width: 100%; /* 🔹CHANGE: button fills form width */
         }
         button:hover {
             background-color: #0d5ca6;
         }
-        a {
-            text-decoration: none;
-            color: #1976d2;
+
+        /* 🔹CHANGE: Added custom class for register link */
+        .register-link {
+            margin-top: 10px;
+            display: block;
+            font-size: 14px;
         }
+
         .error {
             color: red;
+            margin-top: 10px; /* 🔹CHANGE: small margin for spacing */
         }
     </style>
 </head>
@@ -54,17 +60,23 @@
         <div><input type="password" name="password" placeholder="Password" required></div>
 
         <button type="submit">Login</button>
+
+        <!-- 🔹CHANGE: Moved "Register here" inside the form box -->
+        <a class="register-link"
+           th:href="@{/register/{role}(role=${role})}"
+           th:text="'New ' + ${role} + '? Register here'"></a>
     </form>
+
+    <!-- 🔹REMOVED: These 3 links were outside the box -->
+    <!--
 	<a th:href="@{/login/donor}">Login as Donor</a>
 	<a th:href="@{/login/requester}">Login as Requester</a>
-	<a th:href="@{/login/admin}">Login as Admin</a>
+	<a th:href="@{/login/admin}">Login as Admin</a>
+    -->
 
-    <!-- ✅ Fixed "Register here" link -->
-    <p>
-        <a th:href="@{/register/{role}(role=${role})}"
-           th:text="'New ' + ${role} + '? Register here'"></a>
-    </p>
-
+    <!-- Error message -->
     <p class="error" th:if="${error}" th:text="${error}"></p>
 </body>
 </html>
+
+

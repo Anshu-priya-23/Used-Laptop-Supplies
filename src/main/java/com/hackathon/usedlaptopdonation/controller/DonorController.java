@@ -21,20 +21,20 @@ public class DonorController {
     @Autowired
     private LaptopRepository laptopRepository;
 
-    // ✅ Donor Dashboard
+    //  Donor Dashboard
     @GetMapping("/dashboard")
     public String showDashboard(Model model) {
         return "vineesha/donor-dashboard";
     }
 
-    // ✅ Add Laptop Form
+    //  Add Laptop Form
     @GetMapping("/add-laptop")
     public String showAddLaptopForm(Model model) {
         model.addAttribute("laptop", new Laptop());
         return "vineesha/add-laptop";
     }
 
-    // ✅ Save Laptop (fix for Whitelabel error)
+    //  Save Laptop (fix for Whitelabel error)
     @PostMapping("/laptops/save")
     public String saveLaptop(@ModelAttribute("laptop") Laptop laptop) {
         try {
@@ -48,7 +48,7 @@ public class DonorController {
         }
     }
 
-    // ✅ View Laptops
+    
     @GetMapping("/view-laptops")
     public String viewLaptops(Model model) {
         model.addAttribute("laptops", laptopRepository.findAll());
@@ -70,7 +70,7 @@ public class DonorController {
         return "vineesha/edit-laptop"; // make sure file name matches exactly
     }
 
-    // ✅ Save Updated Laptop
+    // Save Updated Laptop
     @PostMapping("/update/{id}")
     public String updateLaptop(@PathVariable("id") Long id, @ModelAttribute("laptop") Laptop updatedLaptop) {
         Laptop existingLaptop = laptopRepository.findById(id)
@@ -89,12 +89,12 @@ public class DonorController {
     public String loginPage(@PathVariable String role, Model model) {
         model.addAttribute("role", role);
 
-        // ✅ Donor and Requester go to registration first
+        // Donor and Requester go to registration first
         if (role.equalsIgnoreCase("donor") || role.equalsIgnoreCase("requester")) {
             return "redirect:/register/" + role;
         }
 
-        // ✅ Admin can directly log in
+        // Admin can directly log in
         return "login";
     }
 

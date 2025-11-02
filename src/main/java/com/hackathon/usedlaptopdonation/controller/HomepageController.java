@@ -36,7 +36,7 @@ public class HomepageController {
         System.out.println("✅ Session saved: loggedInEmail = " + session.getAttribute("loggedInEmail"));
 
         if (username.equals("admin") && password.equals("admin")) {
-            return "redirect:/admin/dashboard";
+            return "redirect:/admin/home";
         } else if (role.equalsIgnoreCase("donor")) {
             return "redirect:/donor/dashboard";
         } else if (role.equalsIgnoreCase("requester")) {
