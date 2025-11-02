@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Donor Dashboard | Rural Rise</title>
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; display: flex; background-color: #f5f7f6; }
+        .sidebar { width: 250px; height: 100vh; background-color: #1b7340; color: white; display: flex; flex-direction: column; padding: 20px; }
+        .sidebar h2 { font-size: 22px; margin-bottom: 30px; }
+        .sidebar a { color: white; text-decoration: none; margin: 8px 0; padding: 10px; border-radius: 6px; transition: background 0.3s; }
+        .sidebar a:hover, .sidebar a.active { background-color: #145b30; }
+        .main { flex: 1; padding: 40px; }
+        h1 { color: #1b7340; margin-bottom: 20px; }
+        p { color: #333; }
+    </style>
+</head>
+<body>
+
+	<div class="sidebar">
+	    <h2>Rural Rise</h2>
+	    <a th:href="@{/donor/dashboard}" class="active">Dashboard</a>
+	    <a th:href="@{/donor/add-laptop}">Add Laptop</a>
+	    <a th:href="@{/donor/view-laptops}">View Laptops</a>
+
+	    <!-- ✅ Logout button at bottom -->
+	    <div style="margin-top: auto;">
+	        <form th:action="@{/logout}" method="post" style="margin-top: 30px;">
+	            <button type="submit"
+	                style="width: 100%; background-color: #c0392b; color: white;
+	                       text-align: center; padding: 10px; border: none;
+	                       border-radius: 6px; cursor: pointer; font-size: 15px;
+	                       transition: background 0.3s;">
+	                Logout
+	            </button>
+	        </form>
+	    </div>
+	</div>
+
+
+
+</body>
+</html>

@@ -16,7 +16,9 @@
         .button-container {
             margin-top: 30px;
         }
-        button {
+        a {
+            display: inline-block;
+            text-decoration: none;
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -26,7 +28,7 @@
             font-size: 16px;
             cursor: pointer;
         }
-        button:hover {
+        a:hover {
             background-color: #45a049;
         }
     </style>
@@ -36,11 +38,16 @@
     <p>Please select your role to continue:</p>
 
     <div class="button-container">
-        <form th:action="@{/login}" method="get">
-            <button type="submit" name="role" value="donor">Donor</button>
-            <button type="submit" name="role" value="requester">Requester</button>
-            <button type="submit" name="role" value="admin">Admin</button>
-        </form>
+        <!-- ✅ Login links -->
+        <a th:href="@{/login/donor}">Login as Donor</a>
+        <a th:href="@{/login/requester}">Login as Requester</a>
+        <a th:href="@{/login/admin}">Login as Admin</a>
+    </div>
+
+    <div class="button-container">
+        <!-- ✅ Register links -->
+        <a th:href="@{/register/donor}">Register as Donor</a>
+        <a th:href="@{/register/requester}">Register as Requester</a>
     </div>
 </body>
 </html>
