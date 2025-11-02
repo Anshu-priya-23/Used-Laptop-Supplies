@@ -1,6 +1,11 @@
 package com.hackathon.usedlaptopdonation.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "matches")
+public class Match {
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.time.LocalDateTime;

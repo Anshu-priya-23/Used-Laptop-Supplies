@@ -5,8 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Repository interface for Match entity.
- * Provides CRUD operations and custom query methods if needed.
+ * Repository for managing fulfilled (matched) donations.
  */
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Long> {
